@@ -10,7 +10,7 @@ const MainContainer = () => {
 
     const mainMovie = movies.results[randomIndex];
 
-    console.log("Main: ", mainMovie)
+    // console.log("Main: ", mainMovie)
     const {original_title, overview, id} = mainMovie;
   return (
     <div>

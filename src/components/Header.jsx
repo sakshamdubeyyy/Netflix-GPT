@@ -29,7 +29,7 @@ const Header = ({setIsLoggedIn, isLoggedIn}) => {
       </Link>    
     </div>
   ) : (
-  <div className="fixed h-18 px-8 py-2 z-10 bg-gradient-to-b from-black w-full flex justify-between items-center">
+  <div className="absolute h-18 px-8 py-2 z-10 bg-gradient-to-b from-black w-full flex justify-between items-center">
       <Link to="/browse">
         <img className="w-28 cursor-pointer" src={Logo} alt="logo" />
       </Link>
