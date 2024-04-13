@@ -1,10 +1,15 @@
-import React from 'react'
+import useGetNowPlayingMovies from '../utils/customHooks/useGetNowPlayingMovies'
 import Header from './Header'
+import MainContainer from './MainContainer';
+import SecondaryContainer from './SecondaryContainer';
 
 const Browse = () => {
+  useGetNowPlayingMovies();
   return (
-    <div className=''>
+    <div className='flex'>
       <Header/>
+      <MainContainer/>
+      <SecondaryContainer/>
     </div>
   )
 }
