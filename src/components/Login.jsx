@@ -12,6 +12,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { BACKGROUND_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -24,22 +25,33 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in
         const { uid, email, displayName } = auth.currentUser;
-        dispatch(addUser({ uid: uid, email: email, displayName: displayName, isLoggedIn: true }));
-        navigate("/browse")
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            isLoggedIn: true,
+          })
+        );
+        navigate("/browse");
         setIsLoggedIn(!isLoggedIn);
         // console.log("logged in", isLoggedIn);
       } else {
         // User is signed out
         dispatch(removeUser());
         setIsLoggedIn(!isLoggedIn);
-        navigate("/")
+        navigate("/");
         // console.log("logged out",isLoggedIn);
       }
     });
+
+    return () => {
+      unsubscribe();
+    }
   }, []);
 
   const toggleSignIn = () => {
@@ -47,10 +59,7 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-    const message = validateForm(
-      email.current.value,
-      password.current.value,
-    );
+    const message = validateForm(email.current.value, password.current.value);
     setErrorMessage(message);
     if (message) return;
     if (!isSignIn) {
@@ -58,20 +67,22 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value,
+        password.current.value
       )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value
-          }).then(() => {
-            // Profile updated!
-            navigate("/")
-          }).catch((error) => {
-            // An error occurred
-            // ...
-          });
+            displayName: name.current.value,
+          })
+            .then(() => {
+              // Profile updated!
+              // navigate("/");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
           setIsSignIn(true);
           // console.log(user);
         })
@@ -91,14 +102,16 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value
-          }).then(() => {
-            // Profile updated!
-            navigate("/")
-          }).catch((error) => {
-            // An error occurred
-            // ...
-          });
+            displayName: name.current.value,
+          })
+            .then(() => {
+              // Profile updated!
+              // navigate("/");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
           console.log(user);
         })
         .catch((error) => {
@@ -113,7 +126,7 @@ const Login = () => {
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c1366fb4-3292-4428-9639-b73f25539794/3417bf9a-0323-4480-84ee-e1cb2ff0966b/IN-en-20240408-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+          src={BACKGROUND_URL}
           alt="background"
         />
       </div>

@@ -2,9 +2,14 @@ import React, { useState } from 'react'
 import Logo from "../assets/Netflix_Logo_PMS.png"
 import { signOut } from 'firebase/auth'
 import { auth } from '../utils/firebase'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import userStore from '../utils/userStore'
+import { USER_ICON_URL } from '../utils/constants'
 
 const Header = ({setIsLoggedIn, isLoggedIn}) => {
+  const displayName = useSelector((state) => state.user.displayName);
+  // console.log(displayName);
   const navigate = useNavigate();
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -19,13 +24,20 @@ const Header = ({setIsLoggedIn, isLoggedIn}) => {
   }
   return isLoggedIn ? (
     <div className="absolute px-8 py-2 z-10 bg-gradient-to-b from-black w-full">
-      <img className="w-44" src={Logo} alt="logo" />
+      <Link to="/">
+        <img className="w-44 cursor-pointer" src={Logo} alt="logo" />
+      </Link>    
     </div>
   ) : (
     <div className="absolute h-18 px-8 py-2 z-10 bg-gradient-to-b from-gray-700 w-full flex justify-between items-center">
-      <img className="w-28" src={Logo} alt="logo" />
+      <Link to="/browse">
+        <img className="w-28 cursor-pointer" src={Logo} alt="logo" />
+      </Link>
       <div className='flex gap-2 items-center'>
-      <img className="w-8 h-8 mix-blend-" alt='usericon' src='https://occ-0-6246-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABTZ2zlLdBVC05fsd2YQAR43J6vB1NAUBOOrxt7oaFATxMhtdzlNZ846H3D8TZzooe2-FT853YVYs8p001KVFYopWi4D4NXM.png?r=229'/>
+        <div className='flex gap-2 justify-center items-center cursor-pointer'>
+          <img className="w-8 h-8 mix-blend-" alt='usericon' src={USER_ICON_URL}/>
+          <p className='text-gray-400'>{displayName}</p>
+        </div>
       <button onClick={handleSignOut} className='p-2 m-2 rounded-lg bg-red-500 text-xs hover:bg-red-600 transition-all'>Sign Out</button>
       </div>
     </div>
