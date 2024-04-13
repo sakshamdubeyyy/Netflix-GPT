@@ -1,9 +1,15 @@
-import Body from './components/Body';
+import { Provider, useDispatch } from "react-redux";
+import Body from "./components/Body";
+import userStore from "./utils/userStore";
 
 function App() {
+
+
   return (
     <div className="App">
-      <Body/>
+      <Provider store={userStore}>
+        <Body />
+      </Provider>
     </div>
   );
 }
