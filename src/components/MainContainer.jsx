@@ -2,10 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import VideoTitle from './VideoTitle'
 import VideoBackground from './VideoBackground'
+import ConnectVPNErrorPage from './ConnectVPNErrorPage'
 
 const MainContainer = () => {
     const movies = useSelector((state) => state.movies?.nowPlayingMovies)
-    if(!movies) return;
+    if(!movies) return <ConnectVPNErrorPage/>;
     const randomIndex = Math.floor(Math.random() * movies.results.length);
 
     const mainMovie = movies.results[randomIndex];
