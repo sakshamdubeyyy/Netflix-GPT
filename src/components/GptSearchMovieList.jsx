@@ -9,7 +9,7 @@ const GptSearchMovieList = ({ title, movies }) => {
       <div className="flex overflow-x-scroll my-4 movie-list-container overflow-y-hidden w-11/12">
         <div className="flex gap-2.5 shadow-lg">
           {movies.map((movie) => (
-            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+            <MovieCard key={movie.id} posterPath={movie.poster_path} movie={movie} />
           ))}
         </div>
       </div>

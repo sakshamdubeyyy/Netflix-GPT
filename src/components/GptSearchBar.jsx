@@ -50,7 +50,7 @@ const GptSearchBar = () => {
 
     const data = gptRes.map((name) => getMovies(name));
     const movies = await Promise.all(data);
-    console.log(movies);
+    // console.log(movies);
     dispatch(addGptMovies({ gptMovies: movies, movieNames: gptRes }));
   }, 500);
 

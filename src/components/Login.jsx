@@ -13,11 +13,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { BACKGROUND_URL } from "../utils/constants";
+import { TbEyeClosed } from "react-icons/tb";
+import { RxEyeOpen } from "react-icons/rx";
+
+
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -152,11 +157,14 @@ const Login = () => {
           className="p-2 m-2 w-full opacity-60 bg-blue-100 text-black outline-none rounded-lg"
         />
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           ref={password}
           placeholder={`${isSignIn ? "Enter Password" : "New Password"}`}
           className="p-2 m-2 w-full opacity-60 bg-blue-100 text-black outline-none rounded-lg"
         />
+        <button onClick={() => setShowPassword(prev => !prev)} className={`absolute inset-y-0 right-10 ${isSignIn ? "top-4" : "top-16"} hover:text-gray-600 px-3 py-2 bg-transparent border border-transparent text-2xl transition-all rounded-md cursor-pointer`}>
+          {showPassword ? <RxEyeOpen/> : <TbEyeClosed/>}
+        </button>
         <p className="text-red-600 text-sm">{errorMessage}</p>
         <button
           type="submit"

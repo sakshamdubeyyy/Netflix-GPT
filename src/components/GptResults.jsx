@@ -10,7 +10,7 @@ const GptResults = () => {
     <div className="p-4 m-4 text-white flex flex-col justify-center w-full h-full overflow-y-scroll movie-list-container">
       <div className="p-4 m-4 text-white flex flex-col justify-center mt-72 -mx-8">
         {movieNames.map((movieName, index) => (
-          <GptSearchMovieList title={movieName} movies={gptMovies[index]} />
+          <GptSearchMovieList key={index} title={movieName} movies={gptMovies[index]} />
         ))}
       </div>
     </div>
