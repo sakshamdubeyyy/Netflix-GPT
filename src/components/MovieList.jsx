@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  const [showClip, setShowClip] = useState(false);
 //   console.log(movies);
-  if (!movies) return;
+  if (!movies) return null;
   return (
     <div className="text-white font-bold mx-4 text-xl">
       <h1>{title}</h1>
