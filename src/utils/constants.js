@@ -9,4 +9,4 @@ export const API_OPTIONS = {
   };
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500"
 export const LANGUAGE_OPTIONS = [{idetifier: "en", name: "English"},{idetifier: "hindi", name: "हिंदी"},{idetifier: "bhojpuri", name: "भोजपुरी"},{idetifier: "spanish", name: "española"},]
-export const OPENAI_KEY = "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";
+export const OPENAI_KEY = "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";
